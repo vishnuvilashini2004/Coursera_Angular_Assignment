@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" ng-app="LunchChecker">
+  <head>
+    <title>Lunch Checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+      .message {
+        font-size: 1.3em;
+        font-weight: bold;
+      }
+      .green-text {
+        color: green;
+      }
+      .red-text {
+        color: red;
+      }
+      .green-border {
+        border: 2px solid green;
+      }
+      .red-border {
+        border: 2px solid red;
+      }
+    </style>
+  </head>
+  <body ng-controller="LunchCheckController">
+    <div class="container mt-5">
+      <h1 class="mb-4">Lunch Checker</h1>
+
+      <div class="form-group">
+        <input id="lunch-menu"
+               type="text"
+               placeholder="List comma separated dishes you usually have for lunch"
+               class="form-control"
+               ng-model="lunchItems"
+               ng-class="{'green-border': messageType === 'success', 'red-border': messageType === 'error'}">
+        <small class="form-text text-muted">
+          Note: Empty items (e.g., ", ,") are not counted.
+        </small>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary" ng-click="checkLunch()">Check If Too Much</button>
+      </div>
+
+      <div class="form-group message" ng-if="message !== null">
+        <span ng-class="{'green-text': messageType === 'success', 'red-text': messageType === 'error'}">
+          {{ message }}
+        </span>
+      </div>
+    </div>
+  </body>
+</html>
